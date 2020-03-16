@@ -15,4 +15,10 @@ public class Memory {
     public void setRow(int position, int value) {
         this.row[position] = value;
     }
+
+    public void printBlock() {
+        for (int i = 0; i < row.length; i++) {
+            System.out.println("[" + i + "]\t-> " + row[i]);
+        }
+    }
 }

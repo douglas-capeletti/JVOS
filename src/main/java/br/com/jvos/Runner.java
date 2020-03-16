@@ -9,7 +9,12 @@ public class Runner {
 
         CPU cpu = new CPU(mem);
 
+        Loader loader = new Loader();
+        Program program = loader.run("/sample.jvs");
 
+        cpu.run(program);
+
+        mem.printBlock();
     }
 
 }
