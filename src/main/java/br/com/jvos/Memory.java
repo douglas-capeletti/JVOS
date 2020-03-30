@@ -17,7 +17,7 @@ public class Memory {
     }
 
     public void printBlock() {
-        for (int i = 0; i < row.length; i++) {
+        for (int i = 0;  i < 10; i++) {
             System.out.println("[" + i + "]\t-> " + row[i]);
         }
     }

@@ -14,33 +14,33 @@ import br.com.jvos.instructions.operation.JType.JMPIL;
 import br.com.jvos.instructions.operation.R1Type.STOP;
 import br.com.jvos.instructions.operation.R2Type.ADD;
 import br.com.jvos.instructions.operation.R2Type.LDX;
+import br.com.jvos.instructions.operation.R2Type.MULT;
 import br.com.jvos.instructions.operation.R2Type.STX;
 import br.com.jvos.instructions.operation.R2Type.SUB;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Loader {
 
-    public Program run(String path) {
-        try (Stream<String> stream = Files.lines(Paths.get(path))) {
-            return new Program(
-                    stream.map(buildInstruction())
-                            .collect(Collectors.toList())
-                            .toArray(Instruction[]::new)
-            );
+    public Program load(String path) {
+        try (Stream<String> lines = Files.lines(Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource(path)).getFile()))) {
+            return new Program(lines.map(interpreter()).collect(Collectors.toList()).toArray(Instruction[]::new));
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("Failed to load program!");
         }
     }
 
-    private Function<String, Instruction> buildInstruction() {
+    public Function<String, Instruction> interpreter() {
         return string -> {
             String[] word = string.split("( |,)");
-            return parseOperation(word);
+            Instruction instruction = parseOperation(word);
+            return instruction;
         };
     }
 
@@ -48,16 +48,16 @@ public class Loader {
 
         int position = 0;
         int[] parameters = new int[4];
-        for (String parameter : word) {
-            if (parameter.contains("R") || parameter.contains("r")) {
-                parameters[position] = extractInt(parameter);
+        for (int i = 1; i < word.length; i++) {
+            if (word[i].contains("R") || word[i].contains("r")) {
+                parameters[position] = extractInt(word[i]);
                 position++;
             } else {
-                parameters[2] = extractInt(parameter);
+                parameters[2] = extractInt(word[i]);
             }
         }
 
-        switch (word[0]) {
+        switch (word[0].toUpperCase()) {
             case "ADDI":
                 return new ADDI(parameters);
             case "LDD":
@@ -84,16 +84,21 @@ public class Loader {
                 return new ADD(parameters);
             case "LDX":
                 return new LDX(parameters);
+            case "MULT":
+                return new MULT(parameters);
             case "STX":
                 return new STX(parameters);
             case "SUB":
                 return new SUB(parameters);
         }
-        throw new RuntimeException("Operation [" + word + "] not found");
+        throw new RuntimeException("Operation [" + String.join(" ", word) + "] not found");
     }
 
+
     int extractInt(String value) {
-        return Integer.parseInt(value.replace("\\D", ""));
+        int result = Integer.parseInt(value.replaceAll("\\D", ""));
+        if (value.contains("-")) result = -result;
+        return result;
     }
 
 }

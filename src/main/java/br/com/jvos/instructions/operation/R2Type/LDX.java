@@ -14,7 +14,7 @@ public class LDX extends Instruction {
         int rdIndex = parameters[0];
         int rsIndex = parameters[1];
         int a = cpu.getMemoryRow(rsIndex);
-        System.out.println("LDX   | R" + rdIndex + " <- [" + rsIndex + "]");
+        System.out.println("LDX   | R" + rdIndex + "   <- [" + rsIndex + "]");
         cpu.setRegister(rdIndex, a);
     }
 }

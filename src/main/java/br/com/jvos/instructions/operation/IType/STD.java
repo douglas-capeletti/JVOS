@@ -14,7 +14,7 @@ public class STD extends Instruction {
         int rsIndex = parameters[0];
         int rs = cpu.getRegister(rsIndex);
         int a = parameters[2];
-        System.out.println("STD  | [" + a + "] <- R" + rsIndex);
+        System.out.println("STD   | [" + a + "] <- R" + rsIndex);
         cpu.setMemoryRow(a, rs);
     }
 }

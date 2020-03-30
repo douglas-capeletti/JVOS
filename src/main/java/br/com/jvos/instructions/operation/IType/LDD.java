@@ -13,7 +13,7 @@ public class LDD extends Instruction {
     public void doOperation(CPU cpu) {
         int rdIndex = parameters[0];
         int a = cpu.getMemoryRow(parameters[2]);
-        System.out.println("LDD  | R" + rdIndex + " <- [" + a + "]");
+        System.out.println("LDD   | R" + rdIndex + "   <- [" + a + "]");
         cpu.setRegister(rdIndex, a);
     }
 }

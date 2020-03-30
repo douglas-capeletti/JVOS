@@ -15,7 +15,7 @@ public class SUB extends Instruction {
         int rd = cpu.getRegister(rdIndex);
         int rsIndex = parameters[1];
         int rs = cpu.getRegister(rsIndex);
-        System.out.println("ADD   | R" + rdIndex + " <- " + rd + " - " + rs);
+        System.out.println("ADD   | R" + rdIndex + "   <- " + rd + " - " + rs);
         cpu.setRegister(rdIndex, rd - rs);
     }
 }

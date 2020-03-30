@@ -14,7 +14,7 @@ public class ADDI extends Instruction {
         int rdIndex = parameters[0];
         int rd = cpu.getRegister(rdIndex);
         int k = parameters[2];
-        System.out.println("ADDI  | R" + rdIndex + " <- " + rd + " + " + k);
+        System.out.println("ADDI   | R" + rdIndex + "   <- " + rd + " + " + k);
         cpu.setRegister(rdIndex, rd + k);
     }
 }

@@ -13,7 +13,7 @@ public class LDI extends Instruction {
     public void doOperation(CPU cpu) {
         int rdIndex = parameters[0];
         int k = parameters[2];
-        System.out.println("LDI  | R" + rdIndex + " <- " + k);
+        System.out.println("LDI   | R" + rdIndex + "   <- " + k);
         cpu.setRegister(rdIndex, k);
     }
 }

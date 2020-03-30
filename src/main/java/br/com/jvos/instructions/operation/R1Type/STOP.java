@@ -12,6 +12,6 @@ public class STOP extends Instruction {
     @Override
     public void doOperation(CPU cpu) {
         System.out.println("STOP");
-        cpu.setPC(-1);
+        cpu.setPC(-2);
     }
 }

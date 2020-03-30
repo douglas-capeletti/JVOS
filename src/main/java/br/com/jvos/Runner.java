@@ -10,7 +10,8 @@ public class Runner {
         CPU cpu = new CPU(mem);
 
         Loader loader = new Loader();
-        Program program = loader.run("/sample.jvs");
+
+        Program program = loader.load("sample1.jvs");
 
         cpu.run(program);
 

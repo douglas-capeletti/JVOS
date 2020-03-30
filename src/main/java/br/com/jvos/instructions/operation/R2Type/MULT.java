@@ -3,9 +3,9 @@ package br.com.jvos.instructions.operation.R2Type;
 import br.com.jvos.CPU;
 import br.com.jvos.instructions.Instruction;
 
-public class ADD extends Instruction {
+public class MULT extends Instruction {
 
-    public ADD(int[] parameters) {
+    public MULT(int[] parameters) {
         super(parameters);
     }
 
@@ -15,7 +15,7 @@ public class ADD extends Instruction {
         int rd = cpu.getRegister(rdIndex);
         int rsIndex = parameters[1];
         int rs = cpu.getRegister(rsIndex);
-        System.out.println("ADD   | R" + rdIndex + "   <- " + rd + " + " + rs);
-        cpu.setRegister(rdIndex, rd + rs);
+        System.out.println("MULT  | R" + rdIndex + "   <- " + rd + " * " + rs);
+        cpu.setRegister(rdIndex, rd * rs);
     }
 }
