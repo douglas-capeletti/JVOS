@@ -1,12 +1,12 @@
 package br.com.jvos;
 
-public class CPU {
+public class Thread {
 
     private int PC = 0;
     private int[] registers = new int[8];
     private Memory memory;
 
-    public CPU(Memory memory) {
+    public Thread(Memory memory) {
         this.memory = memory;
     }
 
@@ -15,7 +15,11 @@ public class CPU {
     }
 
     public void setPC(int PC) {
-        this.PC = PC;
+        this.PC = PC - 1;
+    }
+
+    public void nextPC() {
+        this.PC += 1;
     }
 
     public int getRegister(int position) {

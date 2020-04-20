@@ -4,18 +4,17 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        int size = 1024;
-        Memory mem = new Memory(size);
+        Memory mem = new Memory(1024);
 
-        CPU cpu = new CPU(mem);
+        Thread thread = new Thread(mem);
 
         Loader loader = new Loader();
 
-        Program program = loader.load("sample1.jvs");
+        Program program = loader.load("fibonacci");
 
-        cpu.run(program);
+        thread.run(program);
 
-        mem.printBlock();
+        mem.printBlock(50, 10);
     }
 
 }

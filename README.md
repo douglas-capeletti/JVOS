@@ -1,6 +1,6 @@
 # JVOS
 Java Virtual Operating System
 
-## For run locally type:
+## For build locally type:
  
     ./graldew clean build

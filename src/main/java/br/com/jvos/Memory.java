@@ -1,5 +1,7 @@
 package br.com.jvos;
 
+import static br.com.jvos.Util.lineHeader;
+
 public class Memory {
 
     private int[] row;
@@ -16,9 +18,9 @@ public class Memory {
         this.row[position] = value;
     }
 
-    public void printBlock() {
-        for (int i = 0;  i < 10; i++) {
-            System.out.println("[" + i + "]\t-> " + row[i]);
+    public void printBlock(int start, int size) {
+        for (int i = start;  i < start + size; i++) {
+            System.out.println(lineHeader("[" + i + "]") + (row[i]));
         }
     }
 }

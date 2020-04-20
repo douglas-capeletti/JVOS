@@ -1,23 +1,24 @@
 package br.com.jvos;
 
-import br.com.jvos.instructions.Instruction;
+import br.com.jvos.operations.Operation;
 
 public class Program {
 
-    private Instruction[] instructions;
+    private Operation[] operations;
 
-    public Program(Instruction[] instructions) {
-        this.instructions = instructions;
+    public Program(Operation[] operations) {
+        this.operations = operations;
     }
 
-    void run(CPU cpu) {
-        System.out.println("Program running on PC [" + cpu.getPC() + "");
-        for (Instruction instruction : instructions) {
-            if (cpu.getPC() == -1) break;
-            instruction.doOperation(cpu);
-            cpu.setPC(cpu.getPC() + 1);
+    void run(Thread thread) {
+        System.out.println("Program running...");
+        thread.setPC(1);
+        for (Operation operation : operations) {
+            if (thread.getPC() == 0) break;
+            operation.doOperation(thread);
+            thread.nextPC();
         }
-        cpu.setPC(0);
+        thread.setPC(0);
     }
 
 }
