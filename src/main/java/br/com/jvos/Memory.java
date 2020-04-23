@@ -1,17 +1,32 @@
 package br.com.jvos;
 
+import java.util.Arrays;
+
 public class Memory {
 
     private int[] row;
+    private int nextPartition = 0;
+    private int timesAllocated;
+    private int partitionStart;
+    private int partitionAmount;
+    private boolean[] freePartitions;
 
-//    public Memory(int size) { this.row = new int[size]; }
+    public Memory(int size) {
+        this.row = new int[size];
+        this.partitionAmount = 4;
+        this.timesAllocated = 0;
+        this.partitionStart = this.nextPartition;
+        this.nextPartition = size / this.partitionAmount + this.nextPartition;
+        freePartitions = new boolean[this.row.length / partitionAmount];
+        Arrays.fill(this.freePartitions, true);
+    }
 
     public int getRow(int position) {
         return row[position];
     }
 
     public void setRow(int position, int value) {
-        this.row[position + (this.timesAllocated * this.partitionStart)] = value;
+        this.row[position + (this.timesAllocated * this.row.length / this.partitionAmount)] = value;
     }
 
     public void printBlock() {
@@ -23,23 +38,10 @@ public class Memory {
     }
 
     public void allocateMemory() {
-        if(this.partitionStart >= row.length) {
-            System.out.println("Maximum memory reached. Aborting.");
-        } else {
+        if(this.partitionStart < row.length) {
             this.partitionStart = this.nextPartition;
             this.nextPartition = row.length / 4 + this.nextPartition;
             this.timesAllocated++;
         }
-    }
-
-    private int nextPartition = 0;
-    private int timesAllocated;
-    private int partitionStart;
-
-    public Memory(int size) {
-        this.row = new int[size];
-        this.timesAllocated = 0;
-        this.partitionStart = this.nextPartition;
-        this.nextPartition = size / 4 + this.nextPartition;
     }
 }
