@@ -11,7 +11,7 @@ public class Program {
     }
 
     void run(CPU cpu) {
-        System.out.println("Program running on PC [" + cpu.getPC() + "");
+        System.out.println("Program running on PC [" + cpu.getPC() + "]");
         for (Instruction instruction : instructions) {
             if (cpu.getPC() == -1) break;
             instruction.doOperation(cpu);

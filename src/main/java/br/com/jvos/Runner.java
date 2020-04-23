@@ -12,9 +12,14 @@ public class Runner {
         Loader loader = new Loader();
 
         Program program = loader.load("sample1.jvs");
+        Program program2 = loader.load("sample2.jvs");
 
         cpu.run(program);
+        mem.printBlock();
+        mem.allocateMemory();
 
+        System.out.println("==================================");
+        cpu.run(program2);
         mem.printBlock();
     }
 
