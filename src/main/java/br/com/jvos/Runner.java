@@ -16,9 +16,7 @@ public class Runner {
 
         cpu.run(program);
         mem.printBlock();
-        mem.allocateMemory();
 
-        System.out.println("==================================");
         cpu.run(program2);
         mem.printBlock();
     }

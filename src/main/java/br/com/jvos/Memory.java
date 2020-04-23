@@ -35,6 +35,9 @@ public class Memory {
                 System.out.println("[" + i + "]\t-> " + row[i]);
             }
         }
+        System.out.println("==================================");
+
+        allocateMemory();
     }
 
     public void allocateMemory() {
